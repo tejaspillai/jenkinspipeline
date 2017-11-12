@@ -17,6 +17,8 @@ success
 archiveArtifact artifacts:'**/target/*.war'
 
 }
+}
+}
 stage('deploy')
 {
 
