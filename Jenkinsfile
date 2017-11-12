@@ -50,12 +50,11 @@ success
 echo 'Deployment done'
 }
 
+
 failure
 {
 
 echo 'failed deplyment'
-}
-
 }
 
 }
