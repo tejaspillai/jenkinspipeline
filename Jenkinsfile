@@ -35,9 +35,9 @@ stage ('deploy_production')
 steps
 {
 
-timeout(time:'5',unit:'DAYS')
+timeout(time:5 ,unit:'DAYS')
 {
-input text:'Deployment start?'
+input message:'Deployment start?'
 }
 build job:'deploy-prod'
 
