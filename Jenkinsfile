@@ -17,6 +17,7 @@ archiveArtifacts artifacts:'**/target/*.war'
 }
 
 }
+}
 stage ('deploy_staging')
 {
 
@@ -24,6 +25,7 @@ steps
 {
 build job:'deploy-to-staging'
 }
+
 }
 
 stage ('deploy_production')
