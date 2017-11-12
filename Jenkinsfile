@@ -14,7 +14,7 @@ post
 success
 {
 
-archiveArtifact artifacts:'**/target/*.war'
+archiveArtifacts artifacts:'**/target/*.war'
 
 }
 }
