@@ -38,6 +38,8 @@ stage('deploy_stage')
 {
 steps{
 
+sh "chmod 777 **/target/*.war"
+
 sh "scp -i /root/tomcat_demo.pem **/target/*.war ec2-user@${params.staging}:/var/lib/tomcat7/webapps"
 
 }
@@ -46,6 +48,7 @@ sh "scp -i /root/tomcat_demo.pem **/target/*.war ec2-user@${params.staging}:/var
 stage('deploy_prod')
 {
 steps{
+sh "chmod 777 **/target/*.war"
 
 sh "scp -i /root/tomcat_demo.pem **/target/*.war ec2-user@${params.production}:/var/lib/tomcat7/webapps"
 
