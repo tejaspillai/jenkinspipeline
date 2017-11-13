@@ -1,9 +1,19 @@
-pipeline 
+pipeline
 {
 agent any
+parameters
+{
+string(name:'staging',defaultValue:'18.221.190.28',description:'staging value')
+string(name:'production',defaultValue:'18.220.238.176',description:'prod server')
+}
+triggers
+{
+
+pollSCM	('* * * * *')
+}
 stages
 {
-stage('packaging')
+stage('package')
 {
 steps
 {
@@ -17,45 +27,27 @@ archiveArtifacts artifacts:'**/target/*.war'
 }
 
 }
+
+
 }
-stage ('deploy_staging')
+stage('deploy')
 {
-
-steps
+parallel
 {
-build job:'deploy-to-staging'
-}
-
-}
-
-stage ('deploy_production')
+stage('deploy_stage')
 {
+steps{
 
+sh "scp -i /root/tomcat_demo.pem **/target/*.war ec2-user@${params.staging}:/var/lib/tomcat7/webapps"
 
-steps
+}
+
+}
+stage('deploy_prod')
 {
+steps{
 
-timeout(time:5 ,unit:'DAYS')
-{
-input message:'Deployment start?'
-}
-build job:'deploy-prod'
-
-}
-post
-{
-success
-{
-
-echo 'Deployment done'
-}
-
-
-failure
-{
-
-echo 'failed deplyment'
-}
+sh "scp -i /root/tomcat_demo.pem **/target/*.war ec2-user@${params.production}:/var/lib/tomcat7/webapps"
 
 }
 
@@ -65,5 +57,7 @@ echo 'failed deplyment'
 
 }
 }
+}
 
+}
 
