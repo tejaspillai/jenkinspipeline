@@ -3,8 +3,8 @@ pipeline
 agent any
 parameters
 {
-string(name:'staging',defaultValue:'18.221.190.28',description:'staging value')
-string(name:'production',defaultValue:'18.220.238.176',description:'prod server')
+string(name:'staging',defaultValue:'18.216.64.114',description:'staging value')
+string(name:'production',defaultValue:'52.15.235.78',description:'prod server')
 }
 triggers
 {
